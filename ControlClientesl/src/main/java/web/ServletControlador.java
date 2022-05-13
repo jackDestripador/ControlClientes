@@ -36,6 +36,7 @@ public class ServletControlador extends HttpServlet {
         sesion.setAttribute("clientes", clientes);
         sesion.setAttribute("totalClientes", clientes.size());
         sesion.setAttribute("saldoTotal", this.calcularSaldoTotal(clientes));
+        //es un cambio de manera interna
         //request.getRequestDispatcher("clientes.jsp").forward(request, response);
         response.sendRedirect("clientes.jsp");
     }
