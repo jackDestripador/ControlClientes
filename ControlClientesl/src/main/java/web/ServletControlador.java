@@ -32,6 +32,7 @@ public class ServletControlador extends HttpServlet {
             throws ServletException, IOException {
         List<Cliente> clientes = new ClienteDaoJDBC().listar();
         System.out.println("clientes = " + clientes);
+        //se comparte en el alcance de sesion
         HttpSession sesion = request.getSession();
         sesion.setAttribute("clientes", clientes);
         sesion.setAttribute("totalClientes", clientes.size());
