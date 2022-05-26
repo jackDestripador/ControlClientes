@@ -49,15 +49,14 @@ public class ServletControlador extends HttpServlet {
         }
         return saldoTotal;
     }
-
     private void editarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idCliente
         int idCliente = Integer.parseInt(request.getParameter("idCliente"));
         Cliente cliente = new ClienteDaoJDBC().encontrar(new Cliente(idCliente));
         request.setAttribute("cliente", cliente);
-        String jspEditar = "/WEB-INF/paginas/cliente/editarCliente.jsp";
-        request.getRequestDispatcher(jspEditar).forward(request, response);        
+        String jspEditar= "/WEB-INF/pages/cliente/editarCliente.jsp";
+        request.getRequestDispatcher(jspEditar).forward(request, response);  
     }
 
     @Override
@@ -69,6 +68,9 @@ public class ServletControlador extends HttpServlet {
                 case "insertar":
                     this.insertarCliente(request, response);
                     break;
+                case "modificar":
+                    this.modificarCliente(request, response);
+                    break;
                 default:
                     this.accionDefault(request, response);
             }
@@ -76,7 +78,7 @@ public class ServletControlador extends HttpServlet {
             this.accionDefault(request, response);
         }
     }
-
+    
     private void insertarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario agregarCliente
@@ -100,4 +102,30 @@ public class ServletControlador extends HttpServlet {
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);
     }
+    
+    private void modificarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //recuperamos los valores del formulario editarCliente
+        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String email = request.getParameter("email");
+        String telefono = request.getParameter("telefono");
+        double saldo = 0;
+        String saldoString = request.getParameter("saldo");
+        if (saldoString != null && !"".equals(saldoString)) {
+            saldo = Double.parseDouble(saldoString);
+        }
+
+        //Creamos el objeto de cliente (modelo)
+        Cliente cliente = new Cliente(idCliente, nombre, apellido, email, telefono, saldo);
+
+        //Modificar el  objeto en la base de datos
+        int registrosModificados = new ClienteDaoJDBC().actualizar(cliente);
+        System.out.println("registrosModificados = " + registrosModificados);
+
+        //Redirigimos hacia accion por default
+        this.accionDefault(request, response);
+    }
+    
 }

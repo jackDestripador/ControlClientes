@@ -19,15 +19,15 @@
     </head>
     <body>
         <!--Cabecero-->
-        <jsp:include page="WEB-INF/pages/comunes/cabecero.jsp" />
-        <jsp:include page="WEB-INF/pages/comunes/botonesNavegacion.jsp" />
+        <jsp:include page="/WEB-INF/pages/comunes/cabecero.jsp" />
+        <jsp:include page="/WEB-INF/pages/comunes/botonesNavegacion.jsp" />
 
         
         <!--Listado clientes -->
-        <jsp:include page="WEB-INF/pages/cliente/listadoClietes.jsp"/>
+        <jsp:include page="/WEB-INF/pages/cliente/listadoClietes.jsp"/>
         
         <!-- Pie de pagina-->
-        <jsp:include page="WEB-INF/pages/comunes/piePagina.jsp"/>
+        <jsp:include page="/WEB-INF/pages/comunes/piePagina.jsp"/>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script
