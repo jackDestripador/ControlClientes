@@ -6,9 +6,9 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 public class Conexion {
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/control_cliente?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASSWORD = "123456jesus";
+    private static final String JDBC_URL = "jdbc:mysql://ls-38dc701a4f18cf3a5aeb5ab30b26f6298300265d.c9iraido1bgj.us-east-1.rds.amazonaws.com:3306/control_cliente?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String JDBC_USER = "dbmasteruser";
+    private static final String JDBC_PASSWORD = "!9:%^2sWSfgee=ZS7DWQ^[B*H3=:_=u1";
 
     private static BasicDataSource dataSource;
 
