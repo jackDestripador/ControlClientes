@@ -20,12 +20,8 @@ public class ServletControlador extends HttpServlet {
                 case "editar":
                     this.editarCliente(request, response);
                     break;
-                case "eliminar":
-                    this.elliminarCliente(request, response);
-                    break;
                 default:
                     this.accionDefault(request, response);
-
             }
         } else {
             this.accionDefault(request, response);
@@ -53,15 +49,14 @@ public class ServletControlador extends HttpServlet {
         }
         return saldoTotal;
     }
-
     private void editarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos el idCliente
         int idCliente = Integer.parseInt(request.getParameter("idCliente"));
         Cliente cliente = new ClienteDaoJDBC().encontrar(new Cliente(idCliente));
         request.setAttribute("cliente", cliente);
-        String jspEditar = "/WEB-INF/pages/cliente/editarCliente.jsp";
-        request.getRequestDispatcher(jspEditar).forward(request, response);
+        String jspEditar= "/WEB-INF/pages/cliente/editarCliente.jsp";
+        request.getRequestDispatcher(jspEditar).forward(request, response);  
     }
 
     @Override
@@ -83,7 +78,7 @@ public class ServletControlador extends HttpServlet {
             this.accionDefault(request, response);
         }
     }
-
+    
     private void insertarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario agregarCliente
@@ -107,7 +102,7 @@ public class ServletControlador extends HttpServlet {
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);
     }
-
+    
     private void modificarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //recuperamos los valores del formulario editarCliente
@@ -132,21 +127,5 @@ public class ServletControlador extends HttpServlet {
         //Redirigimos hacia accion por default
         this.accionDefault(request, response);
     }
-
-    private void elliminarCliente(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //recuperamos los valores del formulario editarCliente
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-        
-        //Creamos el objeto de cliente (modelo)
-        Cliente cliente = new Cliente(idCliente);
-
-        //Eliminar  el  objeto en la base de datos
-        int registrosEliminado = new ClienteDaoJDBC().eliminar(cliente);
-        System.out.println("Id Registros Eliminado = " + registrosEliminado);
-
-        //Redirigimos hacia accion por default
-        this.accionDefault(request, response);
-    }
-
+    
 }
